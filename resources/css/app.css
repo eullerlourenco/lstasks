@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+}
+
+/* custom class */
+
+.bg-app-gradient {
+    background-color: var(--color-neutral-900);
+    background-image: linear-gradient(
+        105deg,
+        var(--color-neutral-950) 35%,
+        var(--color-lime-950) 50%,
+        var(--color-emerald-950) 59%,
+        var(--color-green-950) 62%,
+        var(--color-neutral-950) 80%
+    );
+}
+
+.text-gradient {
+    @apply bg-gradient-to-r from-lime-400 to-green-500;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.text-gradient-secondary {
+    @apply bg-gradient-to-r from-orange-500 to-yellow-500;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.btn-primary {
+    @apply text-white cursor-pointer bg-gradient-to-r from-lime-500 to-green-600 px-5 py-2 
+    rounded duration-200 ease-in shadow-lg hover:shadow-lime-600/50 shadow-lime-600/35 focus:outline-none;
+}
+
+.btn-primary-outline {
+    @apply bg-transparent px-5 py-1.5 border-3 border-lime-500 rounded duration-200 ease-in hover:shadow-lg hover:shadow-lime-400/25 focus:outline-none;
+}
+
+.btn-warning {
+    @apply text-white cursor-pointer bg-gradient-to-r from-orange-500 to-yellow-500 px-5 py-2 rounded duration-200 ease-in shadow-lg hover:shadow-yellow-700/50 shadow-yellow-700/35 focus:outline-none;
+}
+
+.btn-secondary {
+    @apply text-white cursor-pointer bg-gradient-to-r from-neutral-500 to-neutral-600 px-5 py-2
+    rounded duration-200 ease-in shadow-lg hover:shadow-neutral-600/50 shadow-neutral-600/35 focus:outline-none;
+}
+
+.btn-blue {
+    @apply text-white cursor-pointer bg-gradient-to-r from-blue-500 to-teal-500 px-5 py-2 
+    rounded duration-200 ease-in shadow-lg hover:shadow-blue-600/50 shadow-blue-700/30 focus:outline-none;
+}
+
+.btn-red {
+    @apply text-white cursor-pointer bg-gradient-to-r from-red-600 to-red-500 px-5 py-2 
+    rounded duration-200 ease-in shadow-lg hover:shadow-red-600/50 shadow-red-600/30 focus:outline-none;
+}
+
+.input {
+    @apply px-2.5 py-1.5 flex flex-grow text-neutral-200 border-2 border-neutral-700 
+    focus:border-lime-400 rounded bg-neutral-900 focus:outline-none duration-200 ease-in;
+}
+
+.icon-options {
+    @apply rounded-full py-1 px-2 border-2 text-neutral-600 border-neutral-600
+    duration-200 ease-in;
+}
