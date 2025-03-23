@@ -1,7 +1,7 @@
 <div
     class="overflow-hidden hover:scale-102 transition-transform duration-200 ease-in-out shadow-xl rounded-2xl {{ $attributes->get('size') }}">
     <div class="flex items-center flex-nowrap px-4 py-2 bg-neutral-950/20">
-        <p class="grow text-neutral-200 text-lg overflow-hidden no-wrap">{{ $task->limitTitle(30) }}</p>
+        <p class="grow text-neutral-200 text-lg overflow-hidden no-wrap">{{ $task->limitTitle(28) }}</p>
         @if ($task->is_completed)
             <span class="size-5 rounded-full from-lime-400 to-green-500 bg-gradient-to-r"></span>
         @elseif ($task->isOverdue())

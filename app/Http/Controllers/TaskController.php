@@ -104,7 +104,7 @@ class TaskController extends Controller
             ->orderBy('is_completed', 'ASC')
             ->orderBy('type', 'ASC')
             ->orderBy('due_date', 'ASC');
-        $tasks = $query->simplePaginate(12);
+        $tasks = $query->paginate(12);
 
         $recurringTasks =
             Task::recurringDays($startDate, $endDate)
