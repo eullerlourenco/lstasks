@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('page-title', 'Forgot my password >')
+@section('page-title', 'Change my password >')
 
 @section('content')
     <div class="relative flex items-center justify-center h-screen">
