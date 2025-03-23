@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -27,14 +28,38 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $query = Task::query();
+
         $query->when($request->startDate && $request->endDate, function (Builder $builder) use ($request) {
             if (strtotime($request->startDate) <= strtotime($request->endDate)) {
-                $builder->whereBetween('due_date', [$request->startDate, $request->endDate])
-                    ->orWhereBetween('completed_at', [$request->startDate, $request->endDate])
-                    ->orWhere(function (Builder $b) use ($request) {
-                        $b->where('type', 'recurring')
-                            ->where('created_at', '<=', $request->startDate . ' 00:00:00');
-                    });
+                $startDate = Carbon::parse($request->startDate . ' 00:00:00')->toDateTimeString();
+                $endDate = Carbon::parse($request->endDate . ' 23:23:59')->toDateTimeString();
+                $period = collect(CarbonPeriod::create($startDate, $endDate))
+                    ->map(function ($date) {
+                        return [
+                            'date' => $date->format('Y-m-d 23:23:59'),
+                            'day' => strtolower($date->format('l')),
+                        ];
+                    })
+                    ->unique()
+                    ->toArray();
+                $builder->where(function (Builder $b) use ($startDate, $endDate, $period) {
+                    $b->whereBetween('due_date', [$startDate, $endDate])
+                        ->orWhereBetween('completed_at', [$startDate, $endDate])
+                        ->orWhere(function (Builder $b2) use ($period) {
+                            $b2->where('type', 'recurring')
+                                ->where('is_completed', false)
+                                ->where(function (Builder $b3) use ($period) {
+                                    foreach ($period as $values) {
+                                        $b3->orWhere('created_at', '<=', $values['date']);
+                                    }
+                                })
+                                ->where(function (Builder $b3) use ($period) {
+                                    foreach ($period as $values) {
+                                        $b3->orWhereRaw("JSON_CONTAINS(recurring_days, ?)", [json_encode($values['day'])]);
+                                    }
+                                });
+                        });
+                });
             }
         });
 
@@ -54,22 +79,32 @@ class TaskController extends Controller
         });
 
         $startDate = $request->startDate ?
-            Carbon::parse($request->startDate)->startOfWeek(0)->format('Y-m-d') :
-            Carbon::now()->startOfWeek(0)->format('Y-m-d');
+            Carbon::parse($request->startDate)->startOfWeek(0)->format('Y-m-d 00:00:00') :
+            Carbon::now()->startOfWeek(0)->format('Y-m-d 00:00:00');
         $endDate = $request->endDate ?
-            Carbon::parse($request->endDate)->endOfWeek(6)->format('Y-m-d') :
-            Carbon::now()->endOfWeek(6)->format('Y-m-d');
+            Carbon::parse($request->endDate)->endOfWeek(6)->format('Y-m-d 23:23:59') :
+            Carbon::now()->endOfWeek(6)->format('Y-m-d 23:23:59');
 
         $query->when(!$request->startDate && !$request->endDate, function (Builder $builder) use ($startDate, $endDate) {
             $builder->whereBetween('due_date', [$startDate, $endDate])
                 ->orWhereBetween('completed_at', [$startDate, $endDate])
-                ->orWhere('type', 'recurring');
+                ->orWhere(function (Builder $b) use ($startDate) {
+                    $b->where('type', 'recurring')
+                        ->where('is_completed', false)
+                        ->orwhere('completed_at', '>=', $startDate);
+                });
+            $builder->orWhere(function (Builder $b) {
+                $b->where('type', 'fixed')
+                    ->where('due_date', '<', now())
+                    ->where('is_completed', false);
+            });
         });
 
-        $query->orderBy('is_completed', 'ASC')
+        $query
+            ->orderBy('is_completed', 'ASC')
             ->orderBy('type', 'ASC')
             ->orderBy('due_date', 'ASC');
-        $tasks = $query->paginate(12);
+        $tasks = $query->simplePaginate(12);
 
         $recurringTasks =
             Task::recurringDays($startDate, $endDate)

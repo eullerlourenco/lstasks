@@ -1,8 +1,6 @@
 <header class="bg-neutral-950/25 shadow backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-screen-xl mx-auto px-4 py-4.5 flex justify-between items-center">
-        <a href="{{ route('tasks.index') }}" class="text-gradient duration-200 ease-in text-3xl font-bold">
-            {{ config('app.name') }}
-        </a>
+        <x-general.logo width="127px" name="logo-header" />
         <nav class="hidden md:block">
             <ul class="flex space-x-6 text-white">
                 <li><a href="{{ route('tasks.index') }}" class="hover:text-lime-400 duration-200 ease-in">Tasks</a></li>

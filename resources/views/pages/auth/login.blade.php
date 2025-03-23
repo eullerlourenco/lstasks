@@ -7,12 +7,10 @@
         <div class="bg-neutral-900 w-full lg:w-1/3 h-screen">
             <div class="h-full flex flex-col align-center justify-around">
                 <div class="text-center">
-                    <a href="{{ route('tasks.index') }}" class="text-gradient duration-200 ease-in text-5xl font-bold">
-                        {{ config('app.name') }}
-                    </a>
+                    <x-general.logo width="210px" name="logo-header" />
                 </div>
                 <div>
-                    <h2 class="text-4xl text-neutral-200 text-center font-normal">Log in to access ;)</h2>
+                    <h2 class="text-3xl text-neutral-200 text-center font-normal">Log in to access ;)</h2>
                 </div>
                 @session('status')
                     <div class="text-lime-400 text-center">

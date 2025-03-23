@@ -13,7 +13,7 @@
                 <a href="{{ route('tasks.edit', ['task' => $task->id]) }}">
                     <div
                         class="flex items-center p-1 hover:scale-101 transition-transform duration-200 cursor-pointer text-neutral-600 hover:text-lime-400">
-                        <p class="leading-4 text-sm">{{ $task->limitTitle(37) }}</p>
+                        <p class="flex-grow leading-4 text-sm">{{ $task->limitTitle(37) }}</p>
                         <i class="fa-solid fa-chevron-right ms-3 md:sm-0"></i>
                     </div>
                 </a>

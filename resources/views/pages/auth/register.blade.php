@@ -6,13 +6,11 @@
     <section class="flex">
         <div class="bg-neutral-900 py-8 w-full lg:w-1/3">
             <div class="h-full flex flex-col align-center justify-center">
-                <div class="text-center mb-20">
-                    <a href="{{ route('tasks.index') }}" class="text-gradient duration-200 ease-in text-5xl font-bold">
-                        {{ config('app.name') }}
-                    </a>
+                <div class="text-center mb-10">
+                    <x-general.logo width="210px" name="logo-header" />
                 </div>
                 <div class="mb-7">
-                    <h2 class="text-4xl text-neutral-200 text-center font-normal">Create an account</h2>
+                    <h2 class="text-3xl text-neutral-200 text-center font-normal">Create an account</h2>
                 </div>
                 <div>
                     <form action="{{ route('register.store') }}" method="POST">

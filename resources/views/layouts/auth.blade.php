@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ Vite::asset('resources/images/app/logo.png') }}" type="image/png">
     <title>@yield('page-title', '') {{ config('app.name', '') }}</title>
     {{-- basic css and js --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -16,6 +17,6 @@
     </main>
     
     {{-- footer --}}
-    @include('partials/footer')
+    @include('partials.footer')
 </body>
 </html>

@@ -1,12 +1,10 @@
-<div class="mb-4">
-    <form action="{{ route('tasks.index') }}" method="GET">
-        <div class="flex flex-row pb-4 items-center justify-start gap-2">
-            <a class="btn-secondary" onclick="openModal('filterModal')">
-                <i class="fa-solid fa-filter me-1"></i>
-                Filters
-            </a>
-        </div>
-    </form>
+<div class="mb-3">
+    <div>
+        <a class="btn-secondary" onclick="openModal('filterModal')">
+            <i class="fa-solid fa-filter me-1"></i>
+            Filters
+        </a>
+    </div>
 </div>
 
 <x-general.modal id="filterModal">
