@@ -1,4 +1,5 @@
 import "./bootstrap";
+import.meta.glob(["../images/**", "../fonts/**"]);
 
 function openModal(id) {
     let modal = document.querySelector(`#${id}`);
