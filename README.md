@@ -3,11 +3,18 @@
 &#x20;&#x20;
 
 LSTasks é um gerenciador de tarefas que permite criar, editar e organizar suas atividades de forma simplificada e eficiente. O projeto oferece suporte a tarefas com datas fixas ou recorrentes, gerenciamento de múltiplos usuários e recursos de autenticação seguros.
+Projeto realizado para praticar e fixar o aprendizado em algumas tecnologias, como o ecossistema Laravel e o Tailwind CSS.
+
+## 📷 Algumas Imagens
 
 <div style="text-align: center;">
+    <h3>Home</h3>
     <img src="https://github.com/eullerlourenco/lstasks/blob/df071601c95bf8cfa9121603f9ae11e3f2bb8fc4/docs/lstasks-home.png" alt="Home" width="600" />
+    <h3>Login</h3>
     <img src="https://github.com/eullerlourenco/lstasks/blob/df071601c95bf8cfa9121603f9ae11e3f2bb8fc4/docs/lstasks-login.png" alt="Login" width="600" />
+    <h3>Task</h3>
     <img src="https://github.com/eullerlourenco/lstasks/blob/df071601c95bf8cfa9121603f9ae11e3f2bb8fc4/docs/lstasks-edit.png" alt="Edit" width="600" />
+    <h3>Profile</h3>
     <img src="https://github.com/eullerlourenco/lstasks/blob/df071601c95bf8cfa9121603f9ae11e3f2bb8fc4/docs/lstasks-profile.png" alt="Profile" width="600" />
 </div>
 
