@@ -74,7 +74,7 @@ Projeto realizado para praticar e fixar o aprendizado em algumas tecnologias, co
 
    ```sh
    composer install
-   npm install && npm run dev
+   npm install && npm run build
    ```
 
 5. Gere a chave da aplicação:
